@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="viewport-fit=cover, width=device-width, initial-scale=1">
+    <link rel="icon" href="css/images/favicon.ico" type="image/x-icon" />
+
+    <!-- This is the main css file for the default Alta theme -->
+    <!-- injector:theme -->
+    <link rel="stylesheet" href="css/libs/oj/v7.1.0/alta/oj-alta-min.css" type="text/css"/>
+    <!-- endinjector -->
+    
+    <!-- This contains icon fonts used by the starter template -->
+    <link rel="stylesheet" href="css/demo-alta-site-min.css" type="text/css"/>
+
+    <!-- This is where you would add any app specific styling -->
+    <link rel="stylesheet" href="css/app.css" type="text/css"/>
+    <title>Sign Up</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+
+  </head>
+  <body>
+      <div class="container">
+          <div class="form-container">
+              <form class="border rounded shadow-lg" method="post">
+                  <h2 class="text-center"><strong>Create</strong> an account.</h2>
+                  <div class="form-group">
+                          <input class="form-control" type="text" name="name" placeholder="Full name" autofocus="" style="margin-bottom: 6px;" required>
+                          <input class="form-control" type="tel" name="phone-number" placeholder="Phone number" style="margin-bottom: 6px;" required>
+                          <select class="form-control" style="margin-bottom: 6px" required>
+                              <option value="" selected>Code stack</option>
+                              <option value="">Front-end</option>
+                              <option value="">Back-end</option>
+                              <option value="">Full Stack</option>
+                          </select>
+                          <input class="form-control" type="text" name="location" placeholder="Location" style="margin-bottom: 6px;" required>
+                          <input class="form-control" type="text" name="username" placeholder="Username" style="margin-bottom: 6px;" required>
+                          <input class="form-control" type="email" name="email" placeholder="Email" style="margin-bottom: 6px;" required>
+                          <input class="form-control" type="password" name="password" placeholder="Password" style="margin-bottom: 6px;" required>
+                          <input class="form-control" type="password" name="confirm-password" placeholder="Confirm Password" style="margin-bottom: 5px;" required>
+                  </div>
+  
+                  <div class="form-group">
+                      <div class="form-check">
+                          <label class="form-check-label">
+                              <input class="form-check-input" type="checkbox">I agree to the license terms.</label>
+                      </div>
+                  </div>
+  
+                  <div class="form-group">
+                      <button class="btn btn-primary btn-block border rounded shadow" type="submit" style="background-color: rgb(215,36,165);">Sign Up</button>
+                  </div>
+                  <a class="already" href="#">Already have an account? Login here.</a>
+              </form>
+          </div>
+      </div>
+      <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> -->
+      <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script> -->
+  </body>
+
+</html>

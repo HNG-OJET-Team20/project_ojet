@@ -5,3 +5,89 @@
     Description:
         This is where any of your application specific styles should be included
 */
+body {
+    background-color: #f1f7fc;
+  }
+  
+  .container {
+    background: #f1f7fc;
+    padding: 80px 0;
+  }
+  
+  .container .form-container {
+    display: table;
+    max-width: 900px;
+    width: 90%;
+    margin: 0 auto;
+    box-shadow: 1px 1px 5px rgba(0,0,0,0.1);
+  }
+  
+  .container form {
+    display: table-cell;
+    width: 400px;
+    background-color: #ffffff;
+    padding: 40px 60px;
+    color: #505e6c;
+  }
+  
+  @media (max-width:991px) {
+    .container form {
+      padding: 40px;
+    }
+  }
+  
+  .container form h2 {
+    font-size: 24px;
+    line-height: 1.5;
+    margin-bottom: 30px;
+  }
+  
+  .container form .form-control {
+    background: #f7f9fc;
+    border: none;
+    border-bottom: 1px solid #dfe7f1;
+    border-radius: 40px;
+    box-shadow: none;
+    outline: none;
+    color: inherit;
+    text-indent: 6px;
+    height: 40px;
+  }
+  
+  .container form .form-check {
+    font-size: 13px;
+    line-height: 20px;
+  }
+  
+  .container form .btn-primary {
+    background: #f4476b;
+    border: none;
+    border-radius: 4px;
+    padding: 11px;
+    box-shadow: none;
+    margin-top: 35px;
+    text-shadow: none;
+    outline: none !important;
+  }
+  
+  .container form .btn-primary:hover, .container form .btn-primary:active {
+    background: #eb3b60;
+  }
+  
+  .container form .btn-primary:active {
+    transform: translateY(1px);
+  }
+  
+  .container form .already {
+    display: block;
+    text-align: center;
+    font-size: 12px;
+    color: #6f7a85;
+    opacity: 0.9;
+    text-decoration: none;
+  }
+  
+  .container .form-container border .form-group  input {
+    border-radius: 40px;
+    color: red;
+  }
