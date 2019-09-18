@@ -7,12 +7,12 @@
  * Your application specific code will go here
  */
 define(['knockout', 'ojs/ojmodule-element-utils', 'ojs/ojknockouttemplateutils', 'ojs/ojrouter', 'ojs/ojresponsiveutils', 'ojs/ojresponsiveknockoututils', 'ojs/ojarraydataprovider',
-        'ojs/ojoffcanvas', 'ojs/ojmodule-element', 'ojs/ojknockout'],
-  function(ko, moduleUtils, KnockoutTemplateUtils, Router, ResponsiveUtils, ResponsiveKnockoutUtils, ArrayDataProvider, OffcanvasUtils) {
-     function ControllerViewModel() {
-       var self = this;
+  'ojs/ojoffcanvas', 'ojs/ojmodule-element', 'ojs/ojknockout'],
+  function (ko, moduleUtils, KnockoutTemplateUtils, Router, ResponsiveUtils, ResponsiveKnockoutUtils, ArrayDataProvider, OffcanvasUtils) {
+    function ControllerViewModel() {
+      var self = this;
 
-       this.KnockoutTemplateUtils = KnockoutTemplateUtils;
+      this.KnockoutTemplateUtils = KnockoutTemplateUtils;
 
       // Media queries for repsonsive layouts
       var smQuery = ResponsiveUtils.getFrameworkQuery(ResponsiveUtils.FRAMEWORK_QUERY_KEY.SM_ONLY);
@@ -20,30 +20,29 @@ define(['knockout', 'ojs/ojmodule-element-utils', 'ojs/ojknockouttemplateutils',
       var mdQuery = ResponsiveUtils.getFrameworkQuery(ResponsiveUtils.FRAMEWORK_QUERY_KEY.MD_UP);
       self.mdScreen = ResponsiveKnockoutUtils.createMediaQueryObservable(mdQuery);
 
-       // Router setup
-       self.router = Router.rootInstance;
-       self.router.configure({
-         'dashboard': {label: 'Dashboard', isDefault: true},
-         'incidents': {label: 'Incidents'},
-         'customers': {label: 'Customers'},
-         'about': {label: 'About'}
-       });
+      // Router setup
+      self.router = Router.rootInstance;
+      self.router.configure({
+        // 'dashboard': { label: 'Dashboard', },
+        'login': { label: 'Login', isDefault: true },
+        'register': { label: 'Register' }
+      });
       Router.defaults['urlAdapter'] = new Router.urlParamAdapter();
 
-      self.moduleConfig = ko.observable({'view':[], 'viewModel':null});
+      self.moduleConfig = ko.observable({ 'view': [], 'viewModel': null });
 
-      self.loadModule = function() {
-        ko.computed(function() {
+      self.loadModule = function () {
+        ko.computed(function () {
           var name = self.router.moduleConfig.name();
           var viewPath = 'views/' + name + '.html';
           var modelPath = 'viewModels/' + name;
           var masterPromise = Promise.all([
-            moduleUtils.createView({'viewPath':viewPath}),
-            moduleUtils.createViewModel({'viewModelPath':modelPath})
+            moduleUtils.createView({ 'viewPath': viewPath }),
+            moduleUtils.createViewModel({ 'viewModelPath': modelPath })
           ]);
           masterPromise.then(
-            function(values){
-              self.moduleConfig({'view':values[0],'viewModel':values[1]});
+            function (values) {
+              self.moduleConfig({ 'view': values[0], 'viewModel': values[1] });
             }
           );
         });
@@ -51,27 +50,28 @@ define(['knockout', 'ojs/ojmodule-element-utils', 'ojs/ojknockouttemplateutils',
 
       // Navigation setup
       var navData = [
-      {name: 'Dashboard', id: 'dashboard',
-       iconClass: 'oj-navigationlist-item-icon demo-icon-font-24 demo-chart-icon-24'},
-      {name: 'Incidents', id: 'incidents',
-       iconClass: 'oj-navigationlist-item-icon demo-icon-font-24 demo-fire-icon-24'},
-      {name: 'Customers', id: 'customers',
-       iconClass: 'oj-navigationlist-item-icon demo-icon-font-24 demo-people-icon-24'},
-      {name: 'About', id: 'about',
-       iconClass: 'oj-navigationlist-item-icon demo-icon-font-24 demo-info-icon-24'}
+        {
+          name: 'Login', id: 'login',
+        },
+        {
+          name: 'Register', id: 'register',
+        },
+        // {
+        //   name: 'Dashboard', id: 'dashboard',
+        // },
       ];
-      self.navDataProvider = new ArrayDataProvider(navData, {keyAttributes: 'id'});
+      self.navDataProvider = new ArrayDataProvider(navData, { keyAttributes: 'id' });
 
       // Drawer
       // Close offcanvas on medium and larger screens
-      self.mdScreen.subscribe(function() {OffcanvasUtils.close(self.drawerParams);});
+      self.mdScreen.subscribe(function () { OffcanvasUtils.close(self.drawerParams); });
       self.drawerParams = {
         displayMode: 'push',
         selector: '#navDrawer',
         content: '#pageContent'
       };
       // Called by navigation drawer toggle button and after selection of nav drawer item
-      self.toggleDrawer = function() {
+      self.toggleDrawer = function () {
         return OffcanvasUtils.toggle(self.drawerParams);
       }
       // Add a close listener so we can move focus back to the toggle button when the drawer closes
@@ -79,9 +79,8 @@ define(['knockout', 'ojs/ojmodule-element-utils', 'ojs/ojknockouttemplateutils',
 
       // Header
       // Application Name used in Branding Area
-      self.appName = ko.observable("App Name");
+      self.appName = ko.observable("OJET Team 20");
       // User Info used in Global Navigation area
-      self.userLogin = ko.observable("john.hancock@oracle.com");
 
       // Footer
       function footerLink(name, id, linkTarget) {
@@ -96,8 +95,8 @@ define(['knockout', 'ojs/ojmodule-element-utils', 'ojs/ojknockouttemplateutils',
         new footerLink('Terms Of Use', 'termsOfUse', 'http://www.oracle.com/us/legal/terms/index.html'),
         new footerLink('Your Privacy Rights', 'yourPrivacyRights', 'http://www.oracle.com/us/legal/privacy/index.html')
       ]);
-     }
+    }
 
-     return new ControllerViewModel();
+    return new ControllerViewModel();
   }
 );
