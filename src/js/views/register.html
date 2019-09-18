@@ -5,6 +5,100 @@
 <div class="oj-hybrid-padding">
   <h1>Register Content Area</h1>
   <div>
-      To change the content of this section, you will make edits to the incidents.html file located in the /js/views folder.
+    To change the content of this section, you will make edits to the
+    incidents.html file located in the /js/views folder.
+  </div>
+
+  <div class="container">
+    <div class="form-container">
+      <form class="border rounded shadow-lg" method="post">
+        <h2 class="text-center"><strong>Create</strong> an account.</h2>
+        <div class="form-group">
+          <input
+            class="form-control"
+            type="text"
+            name="name"
+            placeholder="Full name"
+            autofocus=""
+            style="margin-bottom: 6px;"
+            required
+          />
+          <input
+            class="form-control"
+            type="tel"
+            name="phone-number"
+            placeholder="Phone number"
+            style="margin-bottom: 6px;"
+            required
+          />
+          <select class="form-control" style="margin-bottom: 6px" required>
+            <option value="" selected>Code stack</option>
+            <option value="">Front-end</option>
+            <option value="">Back-end</option>
+            <option value="">Full Stack</option>
+          </select>
+          <input
+            class="form-control"
+            type="text"
+            name="location"
+            placeholder="Location"
+            style="margin-bottom: 6px;"
+            required
+          />
+          <input
+            class="form-control"
+            type="text"
+            name="username"
+            placeholder="Username"
+            style="margin-bottom: 6px;"
+            required
+          />
+          <input
+            class="form-control"
+            type="email"
+            name="email"
+            placeholder="Email"
+            style="margin-bottom: 6px;"
+            required
+          />
+          <input
+            class="form-control"
+            type="password"
+            name="password"
+            placeholder="Password"
+            style="margin-bottom: 6px;"
+            required
+          />
+          <input
+            class="form-control"
+            type="password"
+            name="confirm-password"
+            placeholder="Confirm Password"
+            style="margin-bottom: 5px;"
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <div class="form-check">
+            <label class="form-check-label">
+              <input class="form-check-input" type="checkbox" />I agree to the
+              license terms.</label
+            >
+          </div>
+        </div>
+
+        <div class="form-group">
+          <button
+            class="btn btn-primary btn-block border rounded shadow"
+            type="submit"
+            style="background-color: rgb(215,36,165);"
+          >
+            Sign Up
+          </button>
+        </div>
+        <a class="already" href="#">Already have an account? Login here.</a>
+      </form>
+    </div>
   </div>
 </div>
