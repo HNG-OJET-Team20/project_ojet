@@ -154,6 +154,29 @@
     box-shadow: 0px 2px 5px #32023a;
     border: none;
   }
+
+  register-form-layout > .oj-inputtext-input, .oj-inputpassword-input,.oj-select-choices {
+  border-radius: 20px;
+  padding: 5px;
+  height: 40px;
+  width: 350px;
+}
+.register-form-conntainer {
+  padding: 100px;
+}
+.register-form-layout {
+  box-shadow: 2px 3px 0 #8d909b;
+  position: fixed;
+  z-index: 1;
+  background-color: darkred;
+  width: 500px;
+  height: 500px;
+  top: 15px;
+}
+.oj-form-layout {
+  margin-top: 70px;
+  margin-right: 90px;
+}
   
   .footer {
     min-height: auto !important;
