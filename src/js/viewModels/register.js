@@ -4,13 +4,20 @@
  * The Universal Permissive License (UPL), Version 1.0
  */
 /*
- * Your registration ViewModel code goes here
+ * Your register ViewModel code goes here
  */
-define([],
- function() {
+define(['knockout', 'appController', 'ojs/ojmodule-element-utils', 'ojs/ojformlayout', 'ojs/ojinputtext'],
+ function(ko, app, moduleUtils) {
 
-    function RegistrationViewModel() {
+    function RegisterViewModel() {
       var self = this;
+
+      // Header Config
+      //self.headerConfig = ko.observable({'view':[], 'viewModel':null});
+      // moduleUtils.createView({'viewPath':'views/header.html'}).then(function(view) {
+      //   self.headerConfig({'view':view, 'viewModel':new app.getHeaderModel()})
+      // })
+
       // Below are a set of the ViewModel methods invoked by the oj-module component.
       // Please reference the oj-module jsDoc for additional information.
 
@@ -47,6 +54,6 @@ define([],
      * each time the view is displayed.  Return an instance of the ViewModel if
      * only one instance of the ViewModel is needed.
      */
-    return new RegistrationViewModel();
+    return new RegisterViewModel();
   }
 );
