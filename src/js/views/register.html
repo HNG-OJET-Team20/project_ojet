@@ -2,103 +2,50 @@
  Copyright (c) 2014, 2019, Oracle and/or its affiliates.
  The Universal Permissive License (UPL), Version 1.0
  -->
-<div class="oj-hybrid-padding">
-  <h1>Register Content Area</h1>
-  <div>
-    To change the content of this section, you will make edits to the
-    incidents.html file located in the /js/views folder.
-  </div>
-
-  <div class="container">
-    <div class="form-container">
-      <form class="border rounded shadow-lg" method="post">
-        <h2 class="text-center"><strong>Create</strong> an account.</h2>
-        <div class="form-group">
-          <input
-            class="form-control"
-            type="text"
-            name="name"
-            placeholder="Full name"
-            autofocus=""
-            style="margin-bottom: 6px;"
-            required
-          />
-          <input
-            class="form-control"
-            type="tel"
-            name="phone-number"
-            placeholder="Phone number"
-            style="margin-bottom: 6px;"
-            required
-          />
-          <select class="form-control" style="margin-bottom: 6px" required>
-            <option value="" selected>Code stack</option>
-            <option value="">Front-end</option>
-            <option value="">Back-end</option>
-            <option value="">Full Stack</option>
-          </select>
-          <input
-            class="form-control"
-            type="text"
-            name="location"
-            placeholder="Location"
-            style="margin-bottom: 6px;"
-            required
-          />
-          <input
-            class="form-control"
-            type="text"
-            name="username"
-            placeholder="Username"
-            style="margin-bottom: 6px;"
-            required
-          />
-          <input
-            class="form-control"
-            type="email"
-            name="email"
-            placeholder="Email"
-            style="margin-bottom: 6px;"
-            required
-          />
-          <input
-            class="form-control"
-            type="password"
-            name="password"
-            placeholder="Password"
-            style="margin-bottom: 6px;"
-            required
-          />
-          <input
-            class="form-control"
-            type="password"
-            name="confirm-password"
-            placeholder="Confirm Password"
-            style="margin-bottom: 5px;"
-            required
-          />
+      <!--
+       ** Oracle JET V7.1.0 hybrid mobile application header pattern.
+       ** Please see the Oracle JET Cookbook App Shell: Hybrid Mobile demos for
+       ** more information on how to use this pattern.
+    -->
+<!--      <div class="oj-hybrid-padding">-->
+        <div class="register-form-conntainer oj-flex oj-helper-justify-content-center">
+            <div class="register-form-layout oj-flex oj-helper-justify-content-center">
+                <h3 style="color: #ffffff;">Sign Up</h3>
+                <hr style="font-weight: bold; font-size: 48px; background-color: #000000;">
+                <oj-form-layout>
+                    <div class="oj-form-control-group oj-md-flex-item form-item">
+                        <oj-input-text id="username" placeholder="Enter your preferred username"></oj-input-text>
+                    </div>
+                    <div class="oj-form-control-group oj-md-flex-item form-item">
+                        <oj-input-text id="email" placeholder="Enter your Email address"></oj-input-text>
+                    </div>
+                    <div class="oj-form-control-group oj-md-flex-item form-item">
+                        <oj-input-number id="phone" placeholder="Enter your Phone Number"></oj-input-number>
+                    </div>
+                    <div class="oj-form-control-group oj-md-flex-item form-item">
+                        <oj-input-text id="full-name" placeholder="Enter your Full name"></oj-input-text>
+                    </div>
+                    <div class="oj-form-control-group oj-md-flex-item form-item">
+                        <oj-input-text id="location" placeholder="State your location"></oj-input-text>
+                    </div>
+                    <div class="oj-form-control-group oj-md-flex-item form-item">
+                        <oj-select-many id="multiSelect" style="max-width:20em">
+                            <oj-option value="BE">Backend</oj-option>
+                            <oj-option value="ML">Machine Learning</oj-option>
+                            <oj-option value="DM">Digital Marketing</oj-option>
+                            <oj-option value="FE">Frontend</oj-option>
+                            <oj-option value="MD">Mobile Development</oj-option>
+                            <oj-option value="UX">UX/UI Design</oj-option>
+                            <oj-option value="SE">Sales Engineer</oj-option>
+                        </oj-select-many>
+                    </div>
+                    <div class="oj-form-control-group oj-flex-item form-item">
+                        <oj-input-password id="password" placeholder="Enter your password"></oj-input-password>
+                    </div>
+                    <div class="oj-flex-item">
+                        <oj-button id="submitBtn">Submit</oj-button>
+                    </div>
+                </oj-form-layout>
+            </div>
         </div>
-
-        <div class="form-group">
-          <div class="form-check">
-            <label class="form-check-label">
-              <input class="form-check-input" type="checkbox" />I agree to the
-              license terms.</label
-            >
-          </div>
-        </div>
-
-        <div class="form-group">
-          <button
-            class="btn btn-primary btn-block border rounded shadow"
-            type="submit"
-            style="background-color: rgb(215,36,165);"
-          >
-            Sign Up
-          </button>
-        </div>
-        <a class="already" href="#">Already have an account? Login here.</a>
-      </form>
-    </div>
-  </div>
-</div>
+<!--      </div>-->
