@@ -2,9 +2,10 @@
     Document   : override
     Created on : <date>
     Author     : <author>
-    Description:
+    Description: 
         This is where any of your application specific styles should be included
 */
+<<<<<<< HEAD
 body {
     background-color: #f1f7fc;
   }
@@ -95,6 +96,9 @@ body {
   /*style for the login form*/
   
   #login_form {
+=======
+#login_form {
+>>>>>>> 5519409edb1793d4f9c160f9b3827287a610d7a7
   position: absolute;
   top: 0;
   left: 0;
@@ -103,14 +107,22 @@ body {
   width: 100%;
 }
 
+<<<<<<< HEAD
 #form_wrapper {
+=======
+#wrapper {
+>>>>>>> 5519409edb1793d4f9c160f9b3827287a610d7a7
   padding-bottom: 20px;
   background: #ffffff;
   box-shadow: 0px 0px 5px 0px rgba(83, 3, 97, 0.67);
   border-radius: 3px;
 }
 
+<<<<<<< HEAD
 #logintitle {
+=======
+#title {
+>>>>>>> 5519409edb1793d4f9c160f9b3827287a610d7a7
   font-family: Roboto;
   font-style: normal;
   font-weight: normal;
@@ -120,12 +132,20 @@ body {
   color: #9b51e0;
 }
 
+<<<<<<< HEAD
 #login_form_components {
+=======
+#form_components {
+>>>>>>> 5519409edb1793d4f9c160f9b3827287a610d7a7
   width: 90%;
   margin: auto;
 }
 
+<<<<<<< HEAD
 .lform-ctrl {
+=======
+.form-ctrl {
+>>>>>>> 5519409edb1793d4f9c160f9b3827287a610d7a7
   background: #dedcdcc2;
   border-radius: 500px;
   padding: 20px 15px;
@@ -160,10 +180,16 @@ body {
   border: none;
 }
 
+<<<<<<< HEAD
 
 /* style for the footer of the app*/
+=======
+>>>>>>> 5519409edb1793d4f9c160f9b3827287a610d7a7
 .footer {
   min-height: auto !important;
   font-weight: bold;
 }
+<<<<<<< HEAD
   
+=======
+>>>>>>> 5519409edb1793d4f9c160f9b3827287a610d7a7
