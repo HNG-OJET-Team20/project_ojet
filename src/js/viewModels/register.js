@@ -6,17 +6,24 @@
 /*
  * Your register ViewModel code goes here
  */
-define(['knockout', 'appController', 'ojs/ojmodule-element-utils', 'ojs/ojformlayout', 'ojs/ojinputtext'],
- function(ko, app, moduleUtils) {
+define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojrouter', 'ojs/ojformlayout', 'ojs/ojinputtext', 'ojs/ojselectcombobox'],
+  function (ko, Router, $) {
 
     function RegisterViewModel() {
       var self = this;
 
-      // Header Config
-      //self.headerConfig = ko.observable({'view':[], 'viewModel':null});
-      // moduleUtils.createView({'viewPath':'views/header.html'}).then(function(view) {
-      //   self.headerConfig({'view':view, 'viewModel':new app.getHeaderModel()})
-      // })
+      var router = oj.Router.rootInstance;
+      //profile info
+      self.fullname = ko.observable();
+      self.phone = ko.observable();
+      self.stack = ko.observable();
+      self.location = ko.observable();
+
+      //account info
+      self.username = ko.observable();
+      self.email = ko.observable();
+      self.pass = ko.observable();
+      self.pass2 = ko.observable();
 
       // Below are a set of the ViewModel methods invoked by the oj-module component.
       // Please reference the oj-module jsDoc for additional information.
@@ -29,14 +36,27 @@ define(['knockout', 'appController', 'ojs/ojmodule-element-utils', 'ojs/ojformla
        * and inserted into the DOM and after the View is reconnected
        * after being disconnected.
        */
-      self.connected = function() {
+      self.connected = function () {
         // Implement if needed
+        $(function () {
+          $("#next").click(function () {
+            $("#profileinfo").hide();
+            $("#accinfo").show();
+          })
+          $("#prev").click(function () {
+            $("#profileinfo").show();
+            $("#accinfo").hide();
+          })
+          $("#signup").click(function () {
+            router.go("dashboard");
+          })
+        })
       };
 
       /**
        * Optional ViewModel method invoked after the View is disconnected from the DOM.
        */
-      self.disconnected = function() {
+      self.disconnected = function () {
         // Implement if needed
       };
 
@@ -44,7 +64,7 @@ define(['knockout', 'appController', 'ojs/ojmodule-element-utils', 'ojs/ojformla
        * Optional ViewModel method invoked after transition to the new View is complete.
        * That includes any possible animation between the old and the new View.
        */
-      self.transitionCompleted = function() {
+      self.transitionCompleted = function () {
         // Implement if needed
       };
     }
