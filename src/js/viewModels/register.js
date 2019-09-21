@@ -25,29 +25,29 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojrouter', 'ojs/ojformlayout', 
 //       self.pass = ko.observable();
 //       self.pass2 = ko.observable();
 
-      self.usernameValue = ko.observable("");
-        self.emailValue = ko.observable("");
-        self.phoneValue = ko.observable("");
-        self.fullnameValue = ko.observable("");
-        self.locationValue = ko.observable("");
-        self.selectValue = ko.observable("");
-        self.passwordValue = ko.observable("");
-        self.pass2Value = ko.observable("");
+      self.username = ko.observable("");
+        self.email = ko.observable("");
+        self.phone = ko.observable("");
+        self.fullname = ko.observable("");
+        self.location = ko.observable("");
+        self.stack = ko.observable("");
+        self.password = ko.observable("");
+        self.pass2 = ko.observable("");
 
-        self.UserCol = ko.observable();
-        self.datasource = ko.observable();
+//         self.UserCol = ko.observable();
+//         self.datasource = ko.observable();
 //console.log(self.usernameValue());
         self.addUser = function() {
 
             var userData = JSON.stringify({
-                username: self.usernameValue(),
-                email: self.emailValue(),
-                phone_number: self.phoneValue(),
-                fullname: self.fullnameValue(),
-                location: self.locationValue(),
-                stack: self.selectValue,
-                password: self.passwordValue(),
-                password2: self.pass2Value(),
+                username: self.username(),
+                email: self.email(),
+                phone_number: self.phone(),
+                fullname: self.fullname(),
+                location: self.location(),
+                stack: self.stack(),
+                password: self.password(),
+                password2: self.pass2(),
             });
            // console.log(userData);
 
