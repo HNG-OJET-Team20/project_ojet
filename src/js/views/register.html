@@ -14,9 +14,10 @@
       Create an account
     </h5>
     <div id="form_wrapper">
-      <oj-form-layout>
+      <oj-form-layout id="formlayout">
         <div id="lform_components">
-          <div id="profileinfo">
+          <div id="fbk"></div>
+          <div id="profileinfo"> 
             <h5 id="logintitle" class="oj-helper-text-align-left">
               Profile Information
             </h5>
@@ -35,8 +36,11 @@
             </div>
             <div class="lform-ctrl oj-form-control-inherit">
               <oj-select-one value="{{ stack }}">
-                <oj-option>Dev stack</oj-option>
-                <oj-option value="FF">Firefox</oj-option>
+                <oj-optgroup label="Dev stack">
+                <oj-option value="UI/UX Designer">UI/UX</oj-option>
+                <oj-option value="Front end">Front end</oj-option>
+                <oj-option value="Back end">Back end</oj-option>
+                </oj-optgroup>
               </oj-select-one>
             </div>
             <div class="lform-ctrl oj-form-control-inherit">
@@ -66,16 +70,16 @@
               ></oj-input-text>
             </div>
             <div class="lform-ctrl oj-form-control-inherit">
-              <oj-input-text
+              <oj-input-password
                 placeholder="Password"
                 value="{{ pass }}"
-              ></oj-input-text>
+              ></oj-input-password>
             </div>
             <div class="lform-ctrl oj-form-control-inherit">
-              <oj-input-text
+              <oj-input-password
                 placeholder="Confirm password"
-                value="{{ pass2 }}"
-              ></oj-input-text>
+                value="{{ rpass }}"
+              ></oj-input-password>
             </div>
             <div class="oj-flex oj-helper-justify-content-space-between">
               <div class="oj-flex-items-pad">
@@ -84,7 +88,7 @@
                 </oj-button>
               </div>
               <div class="oj-flex-items-pad">
-                <oj-button class=" fbtn oj-button" id="signup">
+                <oj-button class=" fbtn oj-button" on-oj-action="[[signup]]">
                   <span>Signup</span>
                 </oj-button>
               </div>

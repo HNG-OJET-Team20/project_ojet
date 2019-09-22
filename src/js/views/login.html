@@ -6,19 +6,20 @@
 <div class="form_container oj-flex oj-helper-justify-content-center">
   <div class="oj-md-5 oj-sm-12 oj-md-align-self-center oj-sm-align-self-center">
     <div id="form_wrapper">
-      <h5 id="logintitle">
-        Login to your Account
-      </h5>
-
       <oj-form-layout>
         <div id="lform_components">
+            <div id="fbk"></div>
+            <h5 id="logintitle">
+                Login to your Account
+              </h5>
+        
           <div class="lform-ctrl oj-form-control-inherit">
-            <oj-input-text placeholder="username"></oj-input-text>
+            <oj-input-text placeholder="Email address" value="{{email}}"></oj-input-text>
           </div>
           <div class="lform-ctrl oj-form-control-inherit">
-            <oj-input-password placeholder="password"></oj-input-password>
+            <oj-input-password placeholder="password" value="{{password}}"></oj-input-password>
           </div>
-          <oj-button class=" fbtn oj-button">
+          <oj-button class=" fbtn oj-button" on-oj-action=[[login]]>
             <span>Login</span>
           </oj-button>
         </div>
