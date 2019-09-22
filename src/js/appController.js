@@ -24,8 +24,9 @@ define(['knockout', 'ojs/ojmodule-element-utils', 'ojs/ojknockouttemplateutils',
       self.router = Router.rootInstance;
       self.router.configure({
         'dashboard': { label: 'Dashboard', },
+        'register': { label: 'Register' },
         'login': { label: 'Login', isDefault: true },
-        'register': { label: 'Register' }
+        'logout': { label: 'Logout' },
       });
       Router.defaults['urlAdapter'] = new Router.urlParamAdapter();
 
@@ -51,14 +52,17 @@ define(['knockout', 'ojs/ojmodule-element-utils', 'ojs/ojknockouttemplateutils',
       // Navigation setup
       var navData = [
         {
-          name: 'Login', id: 'login',
+          name: 'Login', id: 'login', loggedIn: false
         },
         {
-          name: 'Register', id: 'register',
+          name: 'Register', id: 'register', loggedIn: false
         },
-        // {
-        //   name: 'Dashboard', id: 'dashboard',
-        // },
+        {
+          name: 'Dashboard', id: 'dashboard', loggedIn: true
+        },
+        {
+          id: "logout", loggedIn: true, iconClass: "fa fa-power-off",
+        },
       ];
       self.navDataProvider = new ArrayDataProvider(navData, { keyAttributes: 'id' });
 
@@ -80,7 +84,35 @@ define(['knockout', 'ojs/ojmodule-element-utils', 'ojs/ojknockouttemplateutils',
       // Header
       // Application Name used in Branding Area
       self.appName = ko.observable("OJET Team 20");
-      // User Info used in Global Navigation area
+      self.isLoggedIn = ko.observable(false);
+
+      // init database
+      var dbReq = window.indexedDB.open("ojetDb", 3);
+      (function initDb() {
+
+        if (!window.indexedDB) {
+          console.log("Your browser doesn't support a stable version of IndexedDB. Such and such feature will not be available.");
+        }
+        dbReq.onsuccess = function (event) {
+          db = dbReq.result;
+        };
+        dbReq.onupgradeneeded = function (event) {
+          // Save the IDBDatabase interface 
+          var db = event.target.result;
+          self.db = db;
+          // Create an objectStore for this database
+          let userTable
+          if (!db.objectStoreNames.contains('user')) {
+            userTable = db.createObjectStore("user", { keyPath: "id", autoIncrement: true });
+            userTable.createIndex("uname", "uname", { unique: true });
+            userTable.createIndex("email", "email", { unique: true });
+          }
+          userTable.transaction.oncomplete = function () {
+            console.log("database created successfully");
+          }
+        };
+      }
+      )();
 
       // Footer
       function footerLink(name, id, linkTarget) {

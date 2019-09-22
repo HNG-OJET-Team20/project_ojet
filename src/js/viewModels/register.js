@@ -6,96 +6,100 @@
 /*
  * Your register ViewModel code goes here
  */
-define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojrouter', 'ojs/ojformlayout', 'ojs/ojinputtext', 'ojs/ojselectcombobox'],
+define(['knockout', 'ojs/ojcore', 'jquery', 'ojs/ojrouter', 'ojs/ojformlayout', 'ojs/ojinputtext', 'ojs/ojselectcombobox'],
   function (ko, Router, $) {
 
     function RegisterViewModel() {
       var self = this;
-
       var router = oj.Router.rootInstance;
-      //profile info
-//       self.fullname = ko.observable();
-//       self.phone = ko.observable();
-//       self.stack = ko.observable();
-//       self.location = ko.observable();
 
-//       //account info
-//       self.username = ko.observable();
-//       self.email = ko.observable();
-//       self.pass = ko.observable();
-//       self.pass2 = ko.observable();
+      self.fullname = ko.observable();
+      self.phone = ko.observable();
+      self.stack = ko.observable();
+      self.location = ko.observable();
 
-      self.username = ko.observable("");
-        self.email = ko.observable("");
-        self.phone = ko.observable("");
-        self.fullname = ko.observable("");
-        self.location = ko.observable("");
-        self.stack = ko.observable("");
-        self.password = ko.observable("");
-        self.pass2 = ko.observable("");
+      //account info
+      self.username = ko.observable();
+      self.email = ko.observable();
+      self.pass = ko.observable();
+      self.rpass = ko.observable();
+      // self.id = h
 
-//         self.UserCol = ko.observable();
-//         self.datasource = ko.observable();
-//console.log(self.usernameValue());
-        self.addUser = function() {
-
-            var userData = JSON.stringify({
-                username: self.username(),
-                email: self.email(),
-                phone_number: self.phone(),
-                fullname: self.fullname(),
-                location: self.location(),
-                stack: self.stack(),
-                password: self.password(),
-                password2: self.pass2(),
-            });
-           // console.log(userData);
-
-
-            // $.ajax({
-            //     url: 'http://127.0.0.1:8090/ojet_api/users/userdata',
-            //     type: 'post',
-            //     data: userData,
-            //     dataType: 'json',
-            //     success: function (result) {
-            //         console.log('Hi');
-            //     }
-            // });
-            var xmlHttp = new XMLHttpRequest();
-            xmlHttp.open('post', 'http://localhost:8000/ojet_api/users/user.php');
-            xmlHttp.setRequestHeader('Content-Type', 'application/json');
-            xmlHttp.setRequestHeader('Access-Control-Allow-Origin', '*');
-            xmlHttp.setRequestHeader('Access-Control-Allow-Header', '*');
-            xmlHttp.setRequestHeader('Access-Control-Allow-Method', '*');
-            xmlHttp.send(userData);
-        }
-      
-      // Below are a set of the ViewModel methods invoked by the oj-module component.
-      // Please reference the oj-module jsDoc for additional information.
-
-      /**
-       * Optional ViewModel method invoked after the View is inserted into the
-       * document DOM.  The application can put logic that requires the DOM being
-       * attached here.
-       * This method might be called multiple times - after the View is created
-       * and inserted into the DOM and after the View is reconnected
-       * after being disconnected.
-       */
       self.connected = function () {
         // Implement if needed
-        $(function () {
-          $("#next").click(function () {
-            $("#profileinfo").hide();
-            $("#accinfo").show();
-          })
-          $("#prev").click(function () {
-            $("#profileinfo").show();
-            $("#accinfo").hide();
-          })
-          $("#signup").click(function () {
-            router.go("dashboard");
-          })
+        function validate() {
+          var sect = $("#fbk");
+          var feedback = function (text, color = "danger") {
+            return `<div class=" mt-2 alert alert-${color} h6 show fb_alert" role="alert">
+            <small>${text}</small>
+          </div>`;
+          };
+
+          if ((self.fullname() && self.phone() && self.location() && self.username() && self.email() && self.pass() && self.rpass()) !== undefined) {
+            var validated = true;
+            if (!(self.email().match(/([@])/) && self.email().match(/([.])/))) {
+              sect.html(feedback("Please enter a valid email"));
+            }
+            if (
+              (self.pass().length > 0 && self.pass().length < 4) ||
+              (self.rpass().length > 0 && self.rpass().length < 4)
+            ) {
+              validated = false;
+              sect.html(feedback("Password should be minimum 4 characters"));
+            } else {
+              if (self.pass() !== self.rpass()) {
+                sect.html(feedback("Passwords does not match"));
+                validated = false;
+              }
+            }
+            let newuser = db.transaction(["user"], "readwrite").objectStore("user");
+            var un = newuser.index("uname");
+            var em = newuser.index("email");
+            if (validated == true) {
+              console.log(db);
+              un.get(`${self.username()}`).onsuccess = function (e) {
+                if (e.target.result != undefined) {
+                  sect.html(feedback("Username already taken"));
+                } else {
+                  em.get(`${self.email()}`).onsuccess = function (e) {
+                    if (e.target.result != undefined) {
+                      sect.html(feedback("An account with this email already exists"));
+                    } else {
+                      newuser.add({
+                        "uname": self.username(),
+                        "name": self.fullname(),
+                        "phone": self.phone(),
+                        "location": self.location(),
+                        "email": self.email(),
+                        "stack": self.stack(),
+                        "password": self.pass()
+                      }); sect.html(feedback("Account created, redirecting to login page...", 'success'));
+                      setTimeout(function () {
+                        router.go('login');
+                      }, 2000)
+                    }
+                  }
+                }
+              }
+            }
+          } else {
+            sect.html(feedback("All fields are required"));
+          }
+        }
+
+        $("#next").click(function () {
+          $("#profileinfo").hide();
+          $("#accinfo").show();
         })
+        $("#prev").click(function () {
+          $("#profileinfo").show();
+          $("#accinfo").hide();
+        })
+
+        self.signup = function () {
+          validate();
+        }
+
       };
 
       /**

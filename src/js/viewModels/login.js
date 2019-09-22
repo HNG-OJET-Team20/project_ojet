@@ -7,34 +7,51 @@
  * Your login ViewModel code goes here
  */
 define([
-  'knockout', 'ojs/ojbootstrap', 'ojs/ojresponsiveutils', 'ojs/ojresponsiveknockoututils',
-'ojs/ojmessaging', 'ojs/ojknockout', 'ojs/ojinputtext', 'ojs/ojbutton', 'ojs/ojformlayout'
+  'knockout', 'ojs/ojrouter', 'ojs/ojresponsiveutils', 'ojs/ojresponsiveknockoututils',
+  'ojs/ojknockout', 'ojs/ojinputtext', 'ojs/ojbutton', 'ojs/ojformlayout'
 ],
- function(ko, Bootstrap, ResponsiveUtils, ResponsiveKnockoutUtils, Message) {
+  function (ko, ResponsiveUtils, ResponsiveKnockoutUtils) {
 
     function LoginViewModel() {
       var self = this;
+      self.email = ko.observable();
+      self.password = ko.observable();
+      var router = oj.Router.rootInstance;
+      var rootViewModel = ko.dataFor(document.getElementById('globalBody'));
+      var feedback = function (text, color = "danger") {
+        return `<div class=" mt-2 alert alert-${color} h6 show fb_alert" role="alert">
+        <small>${text}</small>
+      </div>`;
+      };
+      self.login = function () {
+        let userdb = db.transaction(["user"], "readwrite").objectStore("user");
+        var fetchuser = userdb.index("email");
+        fetchuser.get(`${self.email()}`).onsuccess = function (e) {
+          let { result } = e.target;
+          if (result != undefined) {
+            if (result.password == self.password()) {
+              localStorage.setItem("user", result.uname);
+              router.go('dashboard');
+              
+            } else {
+              document.querySelector("#fbk").innerHTML = feedback("Wrong email or password")
+            }
+          } else {
+            document.querySelector("#fbk").innerHTML = feedback("Please enter correct login details")
+          }
+        }
+      }
 
-
-      // Below are a set of the ViewModel methods invoked by the oj-module component.
-      // Please reference the oj-module jsDoc for additional information.
-
-      /**
-       * Optional ViewModel method invoked after the View is inserted into the
-       * document DOM.  The application can put logic that requires the DOM being
-       * attached here.
-       * This method might be called multiple times - after the View is created
-       * and inserted into the DOM and after the View is reconnected
-       * after being disconnected.
-       */
-      self.connected = function() {
-        // Implement if needed
+      self.connected = function () {
+        if (localStorage.getItem("user") != null) {
+          router.go("dashboard");
+        }
       };
 
       /**
        * Optional ViewModel method invoked after the View is disconnected from the DOM.
        */
-      self.disconnected = function() {
+      self.disconnected = function () {
         // Implement if needed
       };
 
@@ -42,7 +59,7 @@ define([
        * Optional ViewModel method invoked after transition to the new View is complete.
        * That includes any possible animation between the old and the new View.
        */
-      self.transitionCompleted = function() {
+      self.transitionCompleted = function () {
         // Implement if needed
       };
     }
