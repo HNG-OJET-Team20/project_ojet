@@ -9,6 +9,7 @@
 define([
   'ojs/ojcore',
   'knockout',
+  'ojs/ojrouter',
   'jquery',
   'ojs/ojlabel',
   'ojs/ojbootstrap',
@@ -17,18 +18,34 @@ define([
   'ojs/ojlistview',
   'ojs/ojarraydataprovider',
 ],
-  function (oj, ko, $) {
+  function (oj, ko, Router) {
 
-    function DashboardViewModel() {
+    function DashboardViewModel(params) {
+      let { rootInstance } = Router;
       var self = this;
+      var rootViewModel = ko.dataFor(document.getElementById('globalBody'));
+      rootViewModel.isLoggedIn(true);
+      self.fullname = ko.observable();
+      self.username = ko.observable();
+      self.email = ko.observable();
+      self.phone = ko.observable();
+      self.stack = ko.observable();
+      self.location = ko.observable();
+      self.id = ko.observable();
 
-      self.fullname = ko.observable("Obiuwevbi Ejiroghene");
-      self.username = ko.observable("jiroGhene");
-      self.email = ko.observable("ejiroghene15@gmail.com");
-      self.phone = ko.observable("08185279704");
-      self.stack = ko.observable("Full stack");
-      self.location = ko.observable("Lagos state");
+      function loadData() {
+        let userData = localStorage.getItem("userInfo");
+        userData = JSON.parse(userData);
+        let { name, uname, email, phone, stack, location, id } = userData;
+        self.id(`hngi_${id}`);
+        self.fullname(name);
+        self.username(uname);
+        self.email(email);
+        self.phone(phone);
+        self.stack(stack);
+        self.location(location);
 
+      }
       // Below are a set of the ViewModel methods invoked by the oj-module component.
       // Please reference the oj-module jsDoc for additional information.
 
@@ -41,14 +58,31 @@ define([
        * after being disconnected.
        */
       self.connected = function () {
-        // Implement if needed
+        self.id('');
+        self.fullname('');
+        self.username('');
+        self.email('');
+        self.phone('');
+        self.stack('');
+        self.location('');
+        let u = localStorage.getItem("user");
+        if (u == null) {
+          rootInstance.go("login");
+        }
+        let userdata = db.transaction(["user"]).objectStore("user");
+        userdata.index('uname').get(`${u}`).onsuccess = function (e) {
+          let { name, uname, email, phone, stack, location, id } = e.target.result;
+          localStorage.setItem("userInfo", JSON.stringify({ name, uname, email, phone, stack, location, id }));
+          setTimeout(() => {
+            loadData();
+          }, 0);
+        }
       };
 
       /**
        * Optional ViewModel method invoked after the View is disconnected from the DOM.
        */
       self.disconnected = function () {
-        // Implement if needed
       };
 
       /**
